@@ -1,4 +1,4 @@
-## MuleSoft Database Connector
+# MuleSoft Database Connector
 
 Hey guys, Let us do a deep dive into the Database Connector. This article focuses on Datasource connection, the de-facto standard for Spring Applications to connect to the database.
 
