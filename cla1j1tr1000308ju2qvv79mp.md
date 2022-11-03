@@ -106,7 +106,7 @@ sudo systemctl list-units flex-gateway*
 ![HTTP Call 2](https://cdn.hashnode.com/res/hashnode/image/upload/v1667507421639/c5Uxo3LeG.png align="center")
 
 ## Sources:
-- MuleSoft Documentation - https://docs.muleosftc.ojm
+- MuleSoft Documentation - https://docs.mulesoft.com
 - MuleSoft Blog Posts
 
 ## Thank You 
