@@ -110,4 +110,4 @@ sudo systemctl list-units flex-gateway*
 - MuleSoft Blog Posts
 
 ## Thank You 
-Feel free to reach out to me using the form in my email.
+Feel free to comment, reach out. Thanks for your time.
