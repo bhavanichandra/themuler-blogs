@@ -122,7 +122,7 @@ When user right-click on the specified zone, you will get a context menu with yo
 
 ## Prototype:
 
-You can check the complete code @ \[Github\]([https://github.com/themuler/custom-context-menu/tree/main](https://github.com/themuler/custom-context-menu/tree/main)).
+You can check the complete code at [Github](https://github.com/themuler/custom-context-menu/tree/main)
 
 The outcome of this component looks like this:
 
