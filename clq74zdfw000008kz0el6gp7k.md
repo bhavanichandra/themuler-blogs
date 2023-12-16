@@ -115,7 +115,7 @@ As you can see, a `contextmenu` event is registered on a `div`. The `app-context
     
 * Sets the `clientX` and `clientY` to `top` and `left` respectively
     
-* Event to `showContextMenu` is true.
+* Emits an event to `showContextMenu` is true.
     
 
 When user right-click on the specified zone, you will get a context menu with your custom menu items.
