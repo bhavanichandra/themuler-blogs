@@ -5,6 +5,7 @@ description: "MuleSoft's Flex Gateway brief introduction and walkthrough on how 
 tags: ["architecture", "developer", "mulesoft"]
 draft: false
 cover: "./image-1.png"
+tier: epic
 ---
 
 ## Introduction

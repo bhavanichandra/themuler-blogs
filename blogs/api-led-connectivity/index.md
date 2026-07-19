@@ -4,6 +4,7 @@ date: 2022-05-09
 description: "How MuleSoft's API-led connectivity pattern layers Experience, Process, and System APIs, illustrated with an incident-management integration."
 tags: ["mulesoft", "architecture"]
 draft: false
+tier: rare
 ---
 
 ## API Led Connectivity
