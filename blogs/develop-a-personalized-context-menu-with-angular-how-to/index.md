@@ -1,12 +1,9 @@
 ---
 title: "Develop a Personalized Context Menu with Angular: How-To"
-seoTitle: "Create Custom Context Menu: Angular Guide"
-seoDescription: "Develop a custom Angular context menu using Angular Material, mat-menu, and mat-dialog components in a step-by-step guide"
-datePublished: Fri Dec 15 2023 21:23:38 GMT+0000 (Coordinated Universal Time)
-cuid: clq74zdfw000008kz0el6gp7k
-slug: develop-a-personalized-context-menu-with-angular-how-to
-tags: angularjs, typescript, angular-material
-
+date: 2023-12-15
+description: "Develop a custom Angular context menu using Angular Material, mat-menu, and mat-dialog components in a step-by-step guide"
+tags: ["angularjs", "typescript", "angular-material"]
+draft: false
 ---
 
 ## Introduction
@@ -126,7 +123,7 @@ You can check the complete code at [Github](https://github.com/themuler/custom-c
 
 The outcome of this component looks like this:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1702675144887/4e179818-db2d-4970-a4f7-832bc8f332c5.png align="center")
+![](./image-1.png)
 
 As you see here, the custom context menu will not appear in the outer part of the zone shown above.
 

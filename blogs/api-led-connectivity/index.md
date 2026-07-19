@@ -1,3 +1,11 @@
+---
+title: "API Led Connectivity"
+date: 2022-05-09
+description: "How MuleSoft's API-led connectivity pattern layers Experience, Process, and System APIs, illustrated with an incident-management integration."
+tags: ["mulesoft", "architecture"]
+draft: false
+---
+
 ## API Led Connectivity
 
 MuleSoft introduced an approach to enterprise API integration called API Led Connectivity. It describes a way to divide APIs as a separation of concerns as per the business logic. 
@@ -21,7 +29,7 @@ To build a robust incident management system, let us architect an API-Led Connec
 
 
 
-![api-led-connectivity-systems.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652041393356/KGghJD8OR.png align="left")
+![api-led-connectivity-systems.png](./image-1.png)
 
 ### Summary
 - The SaaS Applications are Salesforce, ServiceNow, Slack, and the legacy system.

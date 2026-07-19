@@ -1,12 +1,9 @@
 ---
 title: "Effortless Local Development with a Proxy Service"
-seoTitle: "Streamline Local Development Using Proxy Services"
-seoDescription: "Effortlessly set up a local development proxy service for APIs using Node, Express, and Docker with this comprehensive guide"
-datePublished: Thu Sep 26 2024 05:00:46 GMT+0000 (Coordinated Universal Time)
-cuid: cm1itt0mm001h09lebxpi4mtc
-slug: effortless-local-development-with-a-proxy-service
-tags: software-development, proxy-server
-
+date: 2024-09-26
+description: "Effortlessly set up a local development proxy service for APIs using Node, Express, and Docker with this comprehensive guide"
+tags: ["software-development", "proxy-server"]
+draft: false
 ---
 
 ## Introduction
@@ -127,7 +124,7 @@ curl --location 'http://localhost:8084/api/users'
 
 The below are the logs from the docker container:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1727300928422/d6f6a105-2a8e-4367-bb98-dbdbce9d7b33.png align="center")
+![](./image-1.png)
 
 As you can see above, the path `/api/users` is rewritten to call the actual API with just `/users`.
 
