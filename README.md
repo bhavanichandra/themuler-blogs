@@ -4,12 +4,14 @@ Content source for [bytes-of-me](https://github.com/bhavanichandra/bytes-of-me) 
 
 ## Publishing model
 
-**A merge to `main` is a publish.** There's no separate CMS or staging step:
+**A push to `main` that touches `blogs/**` or `projects/**` is a publish.** There's no separate CMS or staging step — merging a PR is the common case, but any push to `main` under those paths (including a direct push, if branch protection allows it) triggers the same flow:
 
 1. Write/edit a post here, open a PR, merge it to `main`.
-2. `.github/workflows/notify-deploy.yml` fires a Vercel Deploy Hook.
+2. `.github/workflows/notify-deploy.yml` fires on that push and POSTs the Vercel Deploy Hook URL, read from the `VERCEL_DEPLOY_HOOK_URL` repository secret (Settings → Secrets and variables → Actions). Changes that don't touch `blogs/**`/`projects/**` — like this README — are excluded by the workflow's `paths` filter and don't trigger anything.
 3. Vercel rebuilds `bytes-of-me`, which fetches this repo's `main` at build time and folds it into the site.
 4. It's live within a couple minutes of the merge.
+
+**This only works if `VERCEL_DEPLOY_HOOK_URL` is configured as a repo secret.** If it's missing or empty, step 2's `curl` fails, the workflow run shows as failed in the Actions tab, and nothing gets published automatically — the content is merged here but bytes-of-me won't pick it up until the next unrelated deploy (or a manual Deploy Hook trigger).
 
 Nothing here is ever committed into `bytes-of-me` — this repo is the single source of truth for content, fetched fresh on every build.
 
