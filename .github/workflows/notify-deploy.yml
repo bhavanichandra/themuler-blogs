@@ -1,0 +1,14 @@
+name: Notify bytes-of-me deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  trigger-deploy-hook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deploy Hook
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: curl -sf -X POST "$VERCEL_DEPLOY_HOOK_URL"
