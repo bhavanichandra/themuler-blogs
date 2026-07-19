@@ -3,6 +3,9 @@ name: Notify bytes-of-me deploy
 on:
   push:
     branches: [main]
+    paths:
+      - "blogs/**"
+      - "projects/**"
 
 jobs:
   trigger-deploy-hook:
