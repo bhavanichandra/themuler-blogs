@@ -1,9 +1,12 @@
 ---
-title: "Brief Introduction to MuleSoft"
+title: Brief Introduction to MuleSoft
 date: 2022-05-09
-description: "An introduction to MuleSoft, API-led connectivity, and the connectors it provides for building integrations."
-tags: ["mulesoft"]
+description: An introduction to MuleSoft, API-led connectivity, and the connectors it provides for building integrations.
+tags:
+  - mulesoft
 draft: false
+cover: ''
+tier: common
 ---
 
 ## Brief Introduction to MuleSoft
@@ -11,6 +14,7 @@ draft: false
 # What is MuleSoft?
 
 MuleSoft is a middleware, API Integration platform that allows enterprises to build robust integrations to alleviate their business needs and introduces various innovative solutions to expand the business. 
+
 - As per my understanding, MuleSoft introduced an architectural paradigm that combines SOA, some aspects of the MVC pattern, and Enterprise Integration patterns called API-Led Connectivity. 
 - It allows developers and architects to divide the APIs into specific layers such as Experience, Process, and System API.
 
@@ -19,12 +23,14 @@ MuleSoft is a middleware, API Integration platform that allows enterprises to bu
 ## What is an API?
 
 An API is like a blueprint/code that acts as an access point, a blueprint to all types of Systems. Assume that it is a black box that will execute and performs the specified function. 
+
 - MuleSoft provides us with these APIs for developers to implement their business logic using MuleSoft. The advantage of API is that we do not need a deep dive into how a system works internally.
 - In the MuleSoft world, they are called Connector / Modules / Operations. Each connector provides a specific function that it will perform on the system.
 
 ## What is Middleware?
 
 A Middleware is software that acts as a software glue between systems by providing common ways to interact with systems via connectors. 
+
 - Enterprise Service Bus (ESB) is the architecture that allows us with a set of rules and principles over a bus-like infrastructure. 
 - The core concept of ESB is connecting to different systems by putting a communication bus or a software glue between them, decoupling various applications, and allowing them to communicate without any dependency. 
 - MuleSoft developed a runtime engine called Mule, a flexible ESB solution that will act as the glue between systems by providing pluggable connectors.
@@ -46,5 +52,4 @@ MuleSoft provides various connectors such as
     - **Batch:** Enable batch processing of records.
 - **Database:** Connect to JDBC-compliant Databases
 - **Salesforce:** Connect to Salesforce System.
-- **HTTP**: A module to create HTTP(S) server or call an API via HTTP(S). 
-
+- **HTTP**: A module to create HTTP(S) server or call an API via HTTP(S).
