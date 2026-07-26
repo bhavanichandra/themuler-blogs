@@ -1,0 +1,46 @@
+name: Open drafts PR
+
+# Sveltia CMS (themuler-cms) commits content edits directly to `drafts`.
+# This checks on a schedule whether drafts has anything main doesn't, and
+# opens a PR if so — no manual trigger needed. See
+# docs/research/cms-batch-publish-workflow.md in bytes-of-me for why.
+
+on:
+  schedule:
+    - cron: "0 * * * *" # hourly
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check drafts is ahead of main
+        id: diff
+        run: |
+          git fetch origin main drafts
+          count=$(git rev-list --count origin/main..origin/drafts)
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Open PR if none exists yet
+        if: steps.diff.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          existing=$(gh pr list --base main --head drafts --state open --json number --jq '.[0].number')
+          if [ -z "$existing" ]; then
+            gh pr create \
+              --base main \
+              --head drafts \
+              --title "Publish: pending content changes" \
+              --body "Auto-opened by the drafts-publish workflow. Review the editorial suggestions below, then merge to publish."
+          else
+            echo "PR #$existing already open for drafts -> main, new commits will show up there automatically."
+          fi

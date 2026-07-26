@@ -1,0 +1,28 @@
+name: Reset drafts branch
+
+# After the drafts -> main PR merges, drafts still has its own diverged
+# history relative to the new main tip. Reset it to match main so the next
+# publish cycle starts clean. drafts is a disposable staging branch (no
+# protection), so a force-push here is expected and safe.
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  reset:
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'drafts'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reset drafts to main
+        run: |
+          git fetch origin main
+          git push origin origin/main:refs/heads/drafts --force
