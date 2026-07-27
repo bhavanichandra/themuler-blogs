@@ -1,6 +1,6 @@
 # themuler-blogs
 
-Content source for [bytes-of-me](https://github.com/bhavanichandra/bytes-of-me) — blog posts and project write-ups, as plain markdown. This repo holds no build tooling of its own; a merge to `main` is fetched and rendered by bytes-of-me at build time (see below).
+Content source for [bytes-of-me](https://github.com/bhavanichandra/bytes-of-me) — blog posts and project write-ups, as plain markdown. This repo has no site build of its own; a merge to `main` is fetched and rendered by bytes-of-me at build time (see below). It does hold a small Node script (`scripts/discord-notify.mjs`) backing the Discord comments-thread automation described below.
 
 ## Publishing model
 
@@ -46,6 +46,13 @@ Shared by both `blogs/` and `projects/`:
 | `draft`       | boolean         | Draft entries are fetched but filtered out of listings/pages    |
 | `cover`       | string, optional| Relative path to a colocated image, e.g. `./cover.png`         |
 
+`blogs/` entries additionally support:
+
+| Field             | Type              | Notes                                                                                   |
+|-------------------|-------------------|-------------------------------------------------------------------------------------------|
+| `quest`           | string, optional  | Matches a Journey day's `quest` value, for build-time auto-linking (see bytes-of-me#51)   |
+| `enableComments`  | boolean, default `false` | When `true`, publishing this post auto-creates a Discord forum thread — see below   |
+
 `projects/` entries additionally support:
 
 | Field  | Type            | Notes                                      |
@@ -75,6 +82,14 @@ pointing at files colocated in this same folder:
 ## Images
 
 Keep images colocated in the same folder as the `index.md` that uses them — no shared/global image directory. Reference the `cover` field for card thumbnails, and plain relative markdown image syntax (`![alt](./file.png)`) for anything inline in the body.
+
+## Discord comments-thread automation
+
+`.github/workflows/notify-deploy.yml`'s `discord-thread-for-new-posts` job runs on every push to `main` touching `blogs/**`: it diffs the push for **newly-added** post files only (never edits to existing posts), reads each one's frontmatter via `scripts/discord-notify.mjs`, and POSTs to the `DISCORD_WEBHOOK_URL` repo secret (`thread_name` = post title, message = the live post URL) for any with `enableComments: true`. A post can only ever spawn one thread, since a given path can only appear as "added" once in git history.
+
+Requires `DISCORD_WEBHOOK_URL` configured as a repo secret, pointed at the `#blog-posts` Forum Channel's webhook (see bytes-of-me#58's owner action items for server/channel setup).
+
+Run `npm install && npm test` to run `scripts/discord-notify.mjs`'s unit tests.
 
 ## Local preview
 

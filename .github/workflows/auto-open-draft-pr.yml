@@ -1,9 +1,9 @@
 name: Open drafts PR
 
-# Sveltia CMS (themuler-cms) commits content edits directly to `drafts`.
-# This checks on a schedule whether drafts has anything main doesn't, and
-# opens a PR if so — no manual trigger needed. See
-# docs/research/cms-batch-publish-workflow.md in bytes-of-me for why.
+# themuler-cms commits content edits directly to `drafts`. This checks on a
+# schedule whether drafts has anything main doesn't, and opens a PR if so —
+# no manual trigger needed. See docs/research/cms-batch-publish-workflow.md
+# in bytes-of-me for why.
 
 on:
   schedule:

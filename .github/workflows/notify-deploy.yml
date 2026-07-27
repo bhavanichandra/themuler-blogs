@@ -15,3 +15,34 @@ jobs:
         env:
           VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
         run: curl -sf -X POST "$VERCEL_DEPLOY_HOOK_URL"
+
+  discord-thread-for-new-posts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Find newly-added posts
+        id: added
+        run: |
+          added=$(git diff --diff-filter=A --name-only "${{ github.event.before }}" "${{ github.event.after }}" -- 'blogs/*/index.md')
+          echo "paths<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$added" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Discord for enableComments:true posts
+        if: steps.added.outputs.paths != ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ADDED_PATHS: ${{ steps.added.outputs.paths }}
+        run: |
+          IFS=$'\n' read -rd '' -a paths <<< "$ADDED_PATHS" || true
+          node scripts/discord-notify.mjs "$DISCORD_WEBHOOK_URL" "${paths[@]}"
