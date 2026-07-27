@@ -1,25 +1,30 @@
 ---
-title: "API Led Connectivity"
-date: 2022-05-09
-description: "How MuleSoft's API-led connectivity pattern layers Experience, Process, and System APIs, illustrated with an incident-management integration."
-tags: ["mulesoft", "architecture"]
+title: API Led Connectivity
+date: '2022-05-02'
+description: How MuleSoft's API-led connectivity pattern layers Experience, Process, and System APIs, illustrated with an incident-management integration.
+tags:
+  - mulesoft
+  - architecture
 draft: false
 tier: rare
+cover: image-1785103332811.webp
 ---
 
 ## API Led Connectivity
 
 MuleSoft introduced an approach to enterprise API integration called API Led Connectivity. It describes a way to divide APIs as a separation of concerns as per the business logic. 
 It follows a layered architecture comprising three layers, such as:
-  - **Experience**: This layer is an entry point to the applications through which Mobile or Web Apps can communicate.
-  - **Process**: This layer will often contain the business logic, data transformations, and API orchestrations.
-  - **System**: This layer will be the entry point to the external applications, APIs, or Systems such as Salesforce, Database, and other SaaS applications. 
- 
+
+- **Experience**: This layer is an entry point to the applications through which Mobile or Web Apps can communicate.
+- **Process**: This layer will often contain the business logic, data transformations, and API orchestrations.
+- **System**: This layer will be the entry point to the external applications, APIs, or Systems such as Salesforce, Database, and other SaaS applications.
+
 ## Business Use Case:
 
 > To demonstrate the API-Led Connectivity, let us assume the below integration scenario and a layered architecture diagram.
 
 Gary, an online eCommerce platform owner, currently manages all the service requests and incident reports manually, entering into various third-party systems. 
+
 - The initial assessment shows that it was manageable, but as the business grows, the number of requests increases and the earlier management acts as a bottleneck to his business. 
 - He recently bought a license from MuleSoft to streamline the incident management system.
 - The systems Gary uses: are ServiceNow, Slack, Salesforce, Database, and Legacy System to store customer data.
@@ -30,9 +35,10 @@ To build a robust incident management system, let us architect an API-Led Connec
 
 
 
-![api-led-connectivity-systems.png](./image-1.png)
+![](image-1785103382444.png)
 
 ### Summary
+
 - The SaaS Applications are Salesforce, ServiceNow, Slack, and the legacy system.
 - For each SaaS application, we can create a System API, which is the first layer to be designed.
 - As the old customers exist in the legacy system and new customers exist in Salesforce, so to retrieve the records, a process API can help to aggregate the records from both systems and have a single source of truth. Let's call it Customer's API.
