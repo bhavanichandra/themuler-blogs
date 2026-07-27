@@ -32,7 +32,7 @@ jobs:
       - name: Open PR if none exists yet
         if: steps.diff.outputs.count != '0'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.DRAFTS_PR_TOKEN }}
         run: |
           existing=$(gh pr list --base main --head drafts --state open --json number --jq '.[0].number')
           if [ -z "$existing" ]; then
