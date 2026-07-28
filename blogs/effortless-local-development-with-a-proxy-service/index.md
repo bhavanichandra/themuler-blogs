@@ -1,10 +1,13 @@
 ---
-title: "Effortless Local Development with a Proxy Service"
-date: 2024-09-26
-description: "Effortlessly set up a local development proxy service for APIs using Node, Express, and Docker with this comprehensive guide"
-tags: ["software-development", "proxy-server"]
+title: Effortless Local Development with a Proxy Service
+date: 2024-09-26T00:00:00.000Z
+description: Effortlessly set up a local development proxy service for APIs using Node, Express, and Docker with this comprehensive guide
+tags:
+  - software-development
+  - proxy-server
 draft: false
 tier: rare
+enableComments: true
 ---
 
 ## Introduction
