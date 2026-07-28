@@ -1,5 +1,8 @@
 name: Notify bytes-of-me deploy
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main]
