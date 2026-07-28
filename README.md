@@ -85,7 +85,7 @@ Keep images colocated in the same folder as the `index.md` that uses them — no
 
 ## Discord comments-thread automation
 
-`.github/workflows/notify-deploy.yml`'s `discord-thread-for-new-posts` job runs on every push to `main` touching `blogs/**`: it diffs the push for **newly-added** post files only (never edits to existing posts), reads each one's frontmatter via `scripts/discord-notify.mjs`, and POSTs to the `DISCORD_WEBHOOK_URL` repo secret (`thread_name` = post title, message = the live post URL) for any with `enableComments: true`. A post can only ever spawn one thread, since a given path can only appear as "added" once in git history.
+`.github/workflows/notify-deploy.yml`'s `discord-thread-for-new-posts` job runs on every push to `main` touching `blogs/**`: it diffs the push for changed blog files, lets `scripts/discord-notify.mjs` narrow those changes to post `index.md` files, compares each post's frontmatter before vs. after, and POSTs to the `DISCORD_WEBHOOK_URL` repo secret (`thread_name` = post title, message = the live post URL) only when a post becomes both live (`draft: false`) and comment-enabled (`enableComments: true`) in that push. That covers both brand-new posts and older posts that later opt into comments.
 
 Requires `DISCORD_WEBHOOK_URL` configured as a repo secret, pointed at the `#blog-posts` Forum Channel's webhook (see bytes-of-me#58's owner action items for server/channel setup).
 

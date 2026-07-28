@@ -18,7 +18,7 @@ jobs:
     if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'drafts'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 

@@ -22,30 +22,32 @@ jobs:
   discord-thread-for-new-posts:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Find newly-added posts
-        id: added
+      - name: Find changed blog files
+        id: changed
         run: |
-          added=$(git diff --diff-filter=A --name-only "${{ github.event.before }}" "${{ github.event.after }}" -- 'blogs/*/index.md')
+          changed=$(git diff --diff-filter=AM --name-only "${{ github.event.before }}" "${{ github.event.after }}" -- 'blogs/**')
           echo "paths<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$added" >> "$GITHUB_OUTPUT"
+          echo "$changed" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
 
-      - name: Notify Discord for enableComments:true posts
-        if: steps.added.outputs.paths != ''
+      - name: Notify Discord for newly comment-enabled live posts
+        if: steps.changed.outputs.paths != ''
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          ADDED_PATHS: ${{ steps.added.outputs.paths }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CHANGED_PATHS: ${{ steps.changed.outputs.paths }}
         run: |
-          IFS=$'\n' read -rd '' -a paths <<< "$ADDED_PATHS" || true
-          node scripts/discord-notify.mjs "$DISCORD_WEBHOOK_URL" "${paths[@]}"
+          IFS=$'\n' read -rd '' -a paths <<< "$CHANGED_PATHS" || true
+          node scripts/discord-notify.mjs "$DISCORD_WEBHOOK_URL" "$BEFORE_SHA" "${paths[@]}"
