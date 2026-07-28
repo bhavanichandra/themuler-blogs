@@ -1,10 +1,11 @@
 ---
-title: "Testing the Content Pipeline"
-date: 2026-07-19
-description: "First real post published through the new themuler-blogs -> bytes-of-me build-time fetch pipeline."
-tags: ["meta"]
+title: Testing the Content Pipeline
+date: 2026-07-19T00:00:00.000Z
+description: First real post published through the new themuler-blogs -> bytes-of-me build-time fetch pipeline.
+tags:
+  - meta
 draft: false
-# cover: "./cover.png"  # uncomment and add the image file if you want a card thumbnail
+enableComments: true
 ---
 
 ## Testing the Content Pipeline

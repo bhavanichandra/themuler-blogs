@@ -7,7 +7,7 @@ tags:
   - proxy-server
 draft: false
 tier: rare
-enableComments: true
+enableComments: false
 ---
 
 ## Introduction
