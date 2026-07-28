@@ -1,9 +1,11 @@
 ---
-title: "MuleSoft Database Connector"
-date: 2022-06-15
-description: "A deep dive into MuleSoft's Database Connector, covering DataSource configuration and connection pooling for JDBC-compliant databases."
-tags: ["mulesoft"]
+title: MuleSoft Database Connector
+date: 2022-06-15T00:00:00.000Z
+description: A deep dive into MuleSoft's Database Connector, covering DataSource configuration and connection pooling for JDBC-compliant databases.
+tags:
+  - mulesoft
 draft: false
+enableComments: true
 ---
 
 # MuleSoft Database Connector
