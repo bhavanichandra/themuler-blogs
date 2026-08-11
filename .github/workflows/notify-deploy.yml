@@ -9,6 +9,8 @@ on:
     paths:
       - "blogs/**"
       - "projects/**"
+      - "journey/**"
+  workflow_dispatch: {}
 
 jobs:
   trigger-deploy-hook:
