@@ -1,13 +1,15 @@
 name: Open drafts PR
 
-# themuler-cms commits content edits directly to `drafts`. This checks on a
-# schedule whether drafts has anything main doesn't, and opens a PR if so —
-# no manual trigger needed. See docs/research/cms-batch-publish-workflow.md
+# themuler-cms commits content edits directly to `drafts`. Once a day, in the
+# evening, this checks whether drafts has anything main doesn't and opens a PR
+# if so. To publish sooner, run this workflow by hand (Actions tab -> Open
+# drafts PR -> Run workflow). See docs/research/cms-batch-publish-workflow.md
 # in bytes-of-me for why.
 
 on:
   schedule:
-    - cron: "0 * * * *" # hourly
+    # 13:30 UTC = 19:00 IST. GitHub may start scheduled runs a few minutes late.
+    - cron: "30 13 * * *"
   workflow_dispatch: {}
 
 permissions:
