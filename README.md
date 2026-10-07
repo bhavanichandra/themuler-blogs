@@ -33,6 +33,8 @@ projects/
 
 The slug comes from the folder name — there's no separate `slug` field in frontmatter.
 
+`journal/` is flat: one file per date, named `YYYY-MM-DD.md`, with `date` and an optional `title` in frontmatter and the day's note as the body. One entry per date. It feeds the site's `/journal` page.
+
 ## Frontmatter schema
 
 Shared by both `blogs/` and `projects/`:
