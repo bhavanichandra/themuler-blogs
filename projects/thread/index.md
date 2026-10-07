@@ -1,11 +1,15 @@
 ---
-title: "Thread — Distributed Tracing & AI-Powered Recovery"
-date: 2026-07-16
-description: "A distributed transaction tracing SDK and AI-powered recovery platform — built for the Splunk Agentic Ops Hackathon 2026 to cut incident investigation from an hour to under 30 seconds."
-tags: ["python", "splunk", "ai-agents", "observability"]
+title: Thread — Distributed Tracing & AI-Powered Recovery
+date: 2026-07-16T00:00:00.000Z
+description: A distributed transaction tracing SDK and AI-powered recovery platform — built for the Splunk Agentic Ops Hackathon 2026 to cut incident investigation from an hour to under 30 seconds.
+tags:
+  - python
+  - splunk
+  - ai-agents
+  - observability
 draft: false
 tier: epic
-href: "https://github.com/bhavanichandra/thread"
+href: https://github.com/bhavanichandra/thread
 ---
 
 ## Overview
