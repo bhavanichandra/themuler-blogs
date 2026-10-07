@@ -9,7 +9,7 @@ on:
     paths:
       - "blogs/**"
       - "projects/**"
-      - "journey/**"
+      - "journal/**"
   workflow_dispatch: {}
 
 jobs:
