@@ -1,6 +1,6 @@
 ---
 name: editorial-review
-description: Review pending content changes (blogs/projects/journey markdown) for grammar, sentence structure, and technical-accuracy issues. Triggered manually by the repo owner, not automatically on every PR.
+description: Review pending content changes (posts markdown) for grammar, sentence structure, and technical-accuracy issues. Triggered manually by the repo owner, not automatically on every PR.
 disable-model-invocation: true
 ---
 
@@ -10,13 +10,13 @@ Manually-triggered copy-editing pass over content changes in this repo. Not wire
 
 ## Scope
 
-Only review markdown content under `blogs/`, `projects/`, and `journey/` — never review `.github/workflows/`, `config.yml`, or any other repo-infrastructure file. This is a copy-editing pass, not a code review.
+Only review markdown content under `posts/` — never review `.github/workflows/`, `config.yml`, or any other repo-infrastructure file. This is a copy-editing pass, not a code review.
 
 ## Process
 
 1. **Find the diff to review.**
    - If given a PR number or URL as an argument, use `gh pr diff <number>`.
-   - Otherwise, diff the `drafts` branch against `origin/main`: `git diff origin/main...drafts -- blogs projects journey`.
+   - Otherwise, diff the `drafts` branch against `origin/main`: `git diff origin/main...drafts -- posts`.
    - If neither yields a diff (nothing pending), say so and stop.
 2. **For each changed content file**, read the full file (not just the diff hunk, so surrounding context is available) and check for:
    - Grammar and sentence-structure issues
@@ -28,6 +28,6 @@ Only review markdown content under `blogs/`, `projects/`, and `journey/` — nev
 
 ## Out of scope
 
-- Reviewing anything outside `blogs/`, `projects/`, `journey/`
+- Reviewing anything outside `posts/`
 - Auto-committing suggested fixes
 - Running on a schedule or in response to GitHub events — this skill exists specifically so review is opt-in and cost is controlled by the owner choosing when to run it

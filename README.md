@@ -1,13 +1,13 @@
 # themuler-blogs
 
-Content source for [bytes-of-me](https://github.com/bhavanichandra/bytes-of-me) — blog posts and project write-ups, as plain markdown. This repo has no site build of its own; a merge to `main` is fetched and rendered by bytes-of-me at build time (see below). It does hold a small Node script (`scripts/discord-notify.mjs`) backing the Discord comments-thread automation described below.
+Content source for [bytes-of-me](https://github.com/bhavanichandra/bytes-of-me) — posts, as plain markdown. This repo has no site build of its own; a merge to `main` is fetched and rendered by bytes-of-me at build time (see below). It does hold a small Node script (`scripts/discord-notify.mjs`) backing the Discord comments-thread automation described below.
 
 ## Publishing model
 
-**A push to `main` that touches `blogs/**` or `projects/**` is a publish.** There's no separate CMS or staging step — merging a PR is the common case, but any push to `main` under those paths (including a direct push, if branch protection allows it) triggers the same flow:
+**A push to `main` that touches `posts/**` is a publish.** There's no separate CMS or staging step — merging a PR is the common case, but any push to `main` under those paths (including a direct push, if branch protection allows it) triggers the same flow:
 
 1. Write/edit a post here, open a PR, merge it to `main`.
-2. `.github/workflows/notify-deploy.yml` fires on that push and POSTs the Vercel Deploy Hook URL, read from the `VERCEL_DEPLOY_HOOK_URL` repository secret (Settings → Secrets and variables → Actions). Changes that don't touch `blogs/**`/`projects/**` — like this README — are excluded by the workflow's `paths` filter and don't trigger anything.
+2. `.github/workflows/notify-deploy.yml` fires on that push and POSTs the Vercel Deploy Hook URL, read from the `VERCEL_DEPLOY_HOOK_URL` repository secret (Settings → Secrets and variables → Actions). Changes that don't touch `posts/**` — like this README — are excluded by the workflow's `paths` filter and don't trigger anything.
 3. Vercel rebuilds `bytes-of-me`, which fetches this repo's `main` at build time and folds it into the site.
 4. It's live within a couple minutes of the merge.
 
@@ -17,51 +17,31 @@ Nothing here is ever committed into `bytes-of-me` — this repo is the single so
 
 ## Folder structure
 
-Both blogs and projects follow the same nested, co-located layout — a folder per entry, named for its slug, holding an `index.md` plus any images it references:
+Posts follow a nested, co-located layout — a folder per entry, named for its slug, holding an `index.md` plus any images it references:
 
 ```
-blogs/
+posts/
   <slug>/
     index.md
     cover.png       (optional)
     diagram.png     (optional, referenced inline)
-projects/
-  <slug>/
-    index.md
-    cover.png       (optional)
 ```
 
 The slug comes from the folder name — there's no separate `slug` field in frontmatter.
 
-`journal/` is flat: one file per date, named `YYYY-MM-DD.md`, with `date` and an optional `title` in frontmatter and the day's note as the body. One entry per date. It feeds the site's `/journal` page.
-
 ## Frontmatter schema
 
-Shared by both `blogs/` and `projects/`:
+| Field            | Type             | Notes                                                                                   |
+|------------------|------------------|-------------------------------------------------------------------------------------------|
+| `title`          | string           |                                                                                           |
+| `date`           | date             | `YYYY-MM-DD`                                                                             |
+| `description`    | string           | Card/preview blurb                                                                        |
+| `tags`           | string[]         |                                                                                           |
+| `draft`          | boolean          | Draft entries are fetched but filtered out of listings/pages                              |
+| `href`           | string, optional | External link (optional)                                                                 |
+| `enableComments` | boolean, default `false` | When `true`, publishing this post auto-creates a Discord forum thread — see below   |
 
-| Field         | Type            | Notes                                                        |
-|---------------|-----------------|---------------------------------------------------------------|
-| `title`       | string          |                                                                 |
-| `date`        | date            | `YYYY-MM-DD`                                                   |
-| `description` | string          | Card/preview blurb                                              |
-| `tags`        | string[]        |                                                                 |
-| `draft`       | boolean         | Draft entries are fetched but filtered out of listings/pages    |
-| `cover`       | string, optional| Relative path to a colocated image, e.g. `./cover.png`         |
-
-`blogs/` entries additionally support:
-
-| Field             | Type              | Notes                                                                                   |
-|-------------------|-------------------|-------------------------------------------------------------------------------------------|
-| `quest`           | string, optional  | Matches a Journey day's `quest` value, for build-time auto-linking (see bytes-of-me#51)   |
-| `enableComments`  | boolean, default `false` | When `true`, publishing this post auto-creates a Discord forum thread — see below   |
-
-`projects/` entries additionally support:
-
-| Field  | Type            | Notes                                      |
-|--------|-----------------|---------------------------------------------|
-| `href` | string, optional| External link — repo, live demo, etc.       |
-
-Example (`blogs/my-post/index.md`):
+Example (`posts/my-post/index.md`):
 
 ```md
 ---
@@ -70,7 +50,6 @@ date: 2026-07-19
 description: "One-line summary for the card preview."
 tags: ["mulesoft", "architecture"]
 draft: false
-cover: "./cover.png"
 ---
 
 ## My Post
@@ -87,7 +66,7 @@ Keep images colocated in the same folder as the `index.md` that uses them — no
 
 ## Discord comments-thread automation
 
-`.github/workflows/notify-deploy.yml`'s `discord-thread-for-new-posts` job runs on every push to `main` touching `blogs/**`: it diffs the push for changed blog files, lets `scripts/discord-notify.mjs` narrow those changes to post `index.md` files, compares each post's frontmatter before vs. after, and POSTs to the `DISCORD_WEBHOOK_URL` repo secret (`thread_name` = post title, message = the live post URL) only when a post becomes both live (`draft: false`) and comment-enabled (`enableComments: true`) in that push. That covers both brand-new posts and older posts that later opt into comments.
+`.github/workflows/notify-deploy.yml`'s `discord-thread-for-new-posts` job runs on every push to `main` touching `posts/**`: it diffs the push for changed post files, lets `scripts/discord-notify.mjs` narrow those changes to post `index.md` files, compares each post's frontmatter before vs. after, and POSTs to the `DISCORD_WEBHOOK_URL` repo secret (`thread_name` = post title, message = the live post URL) only when a post becomes both live (`draft: false`) and comment-enabled (`enableComments: true`) in that push. That covers both brand-new posts and older posts that later opt into comments.
 
 Requires `DISCORD_WEBHOOK_URL` configured as a repo secret, pointed at the `#blog-posts` Forum Channel's webhook (see bytes-of-me#58's owner action items for server/channel setup).
 

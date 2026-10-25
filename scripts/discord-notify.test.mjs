@@ -3,10 +3,11 @@ import assert from "node:assert/strict";
 import { parseBlogPostIndexPath, readPostFrontmatterFromRaw, selectPostsToNotify } from "./discord-notify.mjs";
 
 test("parses blog post index paths", () => {
-  assert.deepEqual(parseBlogPostIndexPath("blogs/my-post/index.md"), { slug: "my-post" });
-  assert.equal(parseBlogPostIndexPath("blogs/my-post/cover.png"), null);
+  assert.deepEqual(parseBlogPostIndexPath("posts/my-post/index.md"), { slug: "my-post" });
+  assert.equal(parseBlogPostIndexPath("posts/my-post/cover.png"), null);
+  assert.equal(parseBlogPostIndexPath("blogs/my-post/index.md"), null);
   assert.equal(parseBlogPostIndexPath("projects/my-post/index.md"), null);
-  assert.equal(parseBlogPostIndexPath("blogs/nested/post/index.md"), null);
+  assert.equal(parseBlogPostIndexPath("posts/nested/post/index.md"), null);
 });
 
 test("reads only YAML boolean true as true", () => {

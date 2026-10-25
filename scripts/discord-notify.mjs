@@ -49,12 +49,12 @@ export function selectPostsToNotify(changedPosts) {
     .map((postChange) => ({ threadName: postChange.afterFrontmatter.title, url: postChange.url }));
 }
 
-export function postUrlFor(blogSlug) {
-  return `https://bhavanichandra.com/blogs/${blogSlug}`;
+export function postUrlFor(slug) {
+  return `https://bhavanichandra.com/posts/${slug}`;
 }
 
 export function parseBlogPostIndexPath(path) {
-  const match = path.match(/^blogs\/([^/]+)\/index\.md$/);
+  const match = path.match(/^posts\/([^/]+)\/index\.md$/);
   if (!match) return null;
   return { slug: match[1] };
 }
@@ -76,7 +76,7 @@ async function notifyDiscord(webhookUrl, post) {
 async function main() {
   const [webhookUrl, beforeSha, ...changedPaths] = process.argv.slice(2);
   if (!webhookUrl || !beforeSha) {
-    console.error("usage: discord-notify.mjs <webhook-url> <before-sha> <changed-blog-path>...");
+    console.error("usage: discord-notify.mjs <webhook-url> <before-sha> <changed-post-path>...");
     process.exit(1);
   }
 
