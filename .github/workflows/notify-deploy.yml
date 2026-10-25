@@ -7,9 +7,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "blogs/**"
-      - "projects/**"
-      - "journal/**"
+      - "posts/**"
   workflow_dispatch: {}
 
 jobs:
@@ -36,10 +34,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Find changed blog files
+      - name: Find changed post files
         id: changed
         run: |
-          changed=$(git diff --diff-filter=AM --name-only "${{ github.event.before }}" "${{ github.event.after }}" -- 'blogs/**')
+          changed=$(git diff --diff-filter=AM --name-only "${{ github.event.before }}" "${{ github.event.after }}" -- 'posts/**')
           echo "paths<<EOF" >> "$GITHUB_OUTPUT"
           echo "$changed" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
